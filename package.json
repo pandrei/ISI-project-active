@@ -1,10 +1,15 @@
 {
-   "name"    : "ISI-project",
-   "version" : "0.0.1",
-   "private" : true,
-   "dependencies": {
-   "express" : ">= 3.4.3",
-   "mongodb" : "*",
-   "formidable" : "*"
-   }
+  "name": "ISIproject",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "3.4.3",
+    "mongodb": "*"
+  }
 }
