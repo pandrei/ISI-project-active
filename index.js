@@ -13,7 +13,4 @@ handle["/upload"] = requestHandlers.upload;
 handle["/show"] = requestHandlers.show;
 
 server.start(router.route, handle);
-mongo.start(mongoAddress, mongoPort, function(err, db){
-	if (err)
-		throw err;
-});
+mongo.start(mongoAddress, mongoPort, undefined);
