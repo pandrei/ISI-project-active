@@ -1,18 +1,25 @@
-var http = require("http");
-var url = require("url");
-var querystring = require("querystring");
+var express = require("express"),
+	fs = require("fs"),
+	http = require("http");
 
-function start(route, handle) {
-	http.createServer(function(request, response) {
-		var pathname = url.parse(request.url).pathname;
-		console.log("Request for " + pathname + " received.");
+// Framework built over http module
+var express_app = express();
+express_app.use(express.bodyParser());
+express_app.use(express.cookieParser());
+express_app.use(express.session({secret: '1234567890QWERTY'}));
 
-		route(handle, pathname, response, request);
+function start_server(server_host, server_port){
+	server = express_app.listen(server_port, server_host, function(){
+		console.log("Listening on " + server_host + ":" + server_port);
+	});
 
-	}).listen(8888);
+}
 
+function restart_server(server_host, server_port){
+	server.close()
+	start_server(server_host, server_port);
+}
 
-	console.log("Server has started");
-};
-
-exports.start = start;
+exports.start = start_server;
+exports.restart = restart_server;
+exports.express_app = express_app;

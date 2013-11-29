@@ -1,16 +1,20 @@
-var server = require("./server"),
-	router = require("./router"),
-	requestHandlers = require("./requestHandler"),
-	mongo = require("./mongo");
+var fs = require('fs'),
+	db = require('./db'),
+	server = require('./server'),
+	router = require('./router');
 
-var mongoAddress = "127.0.0.1",
-	mongoPort = "27017";
+// Load config json file
+var config = JSON.parse(fs.readFileSync("./config.json"));
 
-var handle = [];
-handle["/"] = requestHandlers.start;
-handle["/start"] = requestHandlers.start;
-handle["/upload"] = requestHandlers.upload;
-handle["/show"] = requestHandlers.show;
+db.setUp(config.db_host, config.db_port, config.db_name, startServer);
 
-server.start(router.route, handle);
-mongo.start(mongoAddress, mongoPort, undefined);
+function startServer(db){
+	server.start(config.server_host, config.server_port);
+	router.route(server.express_app, db);
+};
+
+// Watch for changes on config.json, reload server if file is modiffied
+fs.watchFile("./config.json", function(){
+	var config = JSON.parse(fs.readFileSync("./config.json"));
+	server.restart(config.server_host, config.server_port)
+});
