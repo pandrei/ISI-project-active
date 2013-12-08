@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="css/main.css"/>
+        <script src="/js/main.js"></script>
+        <script src='/js/jquery-1.9.1.min.js'></script>
+        <script src='/js/jquery-ui-1.10.2.custom.min.js'></script>
+        <script>
+            $(document).ready(function () {
+                $(".search-result").find(".stare-raport").each(function () {
+                    if($(this).text() != "In asteptare") {
+                        $(this).closest('li').find(".button-reject").hide();
+                        $(this).closest('li').find(".button-approve").hide();
+                    }
+                });
+
+                $('.button-approve').click(function () {
+                    $(this).hide();
+                    $(this).closest('li').find(".button-reject").hide();
+                    $(this).closest('li').find(".stare-raport").text("Aprobat");
+                    return false;
+                });
+
+                $('.button-reject').click(function () {
+                    $(this).hide();
+                    $(this).closest('li').find(".button-approve").hide();
+                    $(this).closest('li').find(".stare-raport").text("Respins");
+                    return false;
+                });
+
+                $('.search-button').click(function () {
+                    var nume = $("#nume-search").val();
+                    var luna = $("#luna-search").val();
+                    var an = $("#an-search").val();
+                    var stare = $("#stare-search").val();
+                    alert("Se face cautare in baza de date dupa " + nume + " " + luna + " " + an + " " + stare);
+                    $('.search-result').show();
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <input value="Completare" type="button" class="meniu-button" onclick="completare()"/>
+            <input value="Vizualizare" type="button" class="meniu-button" onclick="vizualizare()"/>
+            <input value="Administrare" type="button" class="meniu-button" onclick="administare()"/>
+        </div>
+            
+        <div class="content">
+            <div class="search-bar">
+                <span >Nume</span>
+                <input id="nume-search"/>
+                 <span >Luna</span>
+                <input id="luna-search"/>
+                 <span >An</span>
+                <input id="an-search"/>
+                 <span >Stare</span>
+                <select id="stare-search">
+                  <option value="Aprobat">Aprobat</option>
+                  <option value="In asteptare">In asteptare</option>
+                  <option value="Respins">Respins</option>
+                </select>
+                <a class="search-button" onclick="">Cautare</a>
+            </div>
+            <div class="search-result" style="display: none">
+                <ul>
+                    <li>
+                        <span>nume angajat</span>
+                        <span>divizie</span>
+                        <span class="stare-raport">In asteptare</span>
+                        <a href="completare.html">Vizualizare</a>
+                        <a class="button-approve">Aproba</a>
+                        <a class="button-reject">Respinge</a>
+                    </li>
+                    <li>
+                        <span>nume angajat</span>
+                        <span>divizie</span>
+                        <span class="stare-raport">Neaprobat</span>
+                        <a href="completare.html">Vizualizare</a>
+                        <a class="button-approve">Aproba</a>
+                        <a class="button-reject">Respinge</a>
+                    </li>
+                    <li>
+                        <span>nume angajat</span>
+                        <span>divizie</span>
+                        <span class="stare-raport">Aprobat</span>
+                        <a href="completare.html">Vizualizare</a>
+                        <a class="button-approve">Aproba</a>
+                        <a class="button-reject">Respinge</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

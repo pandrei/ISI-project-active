@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="css/main.css"/>
+        <script src="/js/main.js"></script>
+        <script src='/js/jquery-1.9.1.min.js'></script>
+        <script src='/js/jquery-ui-1.10.2.custom.min.js'></script>
+        <script>
+            $(document).ready(function () {
+                $('#register-new-user').click(function () {
+                    var userName = $("#username-newUser").val();
+                    var name = $("#name-newUser").val();
+                    var prename = $("#prename-newUser").val();
+                    var passConfirmation = $("#passConfirmation-newUser").val();
+                    var pass = $("#pass-newUser").val();
+                    var dept = $("#nume-search").val();
+                    var available = true;
+                    //se verifica daca usernameul este available
+                    if (userName == "" || name == "" || prename == "" || pass == "" || passConfirmation == "" || dept == "") {
+                        alert("Campurile oblicatorii nu au fost completate");
+                    }
+                    else if (available == false) {
+                        alert("Username nu este valid");
+                    }
+                    else if (passConfirmation != pass) {
+                        alert("Parola a fost reintrodusa gresit");
+                    } else {
+                        window.location.href = "Loogedin.html";
+                    }
+                    return false;
+                });
+            });
+        </script>
+        <title></title>
+    </head>
+    <body>
+        <div class="content">
+            <ul class="new-user-content">
+                <li >
+                    <div>
+                        <span>UserName:</span>
+                        <input id="username-newUser"/>
+                    </div>
+                </li>
+                <li >
+                    <div>
+                        <span>Nume:</span>
+                        <input id="name-newUser"/>
+                    </div>
+                </li>
+                <li >
+                    <span>Prenume:</span>
+                    <input id="prename-newUser"/>
+                </li>
+                <li >
+                    <span>Divizie:</span>
+                    <select id="div-newUser">
+                      <option value="idIT">Divizia IT</option>
+                      <option value="idHr">Divizia HR</option>
+                      <option value="idAdministrativ">Administrativ</option>
+                    </select>
+                </li>
+                <li >
+                    <span>Parola:</span>
+                    <input id="pass-newUser"/>
+                </li>
+                <li >
+                    <span>Confirmare parola:</span>
+                    <input id="passConfirmation-newUser"/>
+                </li class="new-user-content">
+                <li>
+                    <a id="register-new-user">Inregistrare</a>
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>
